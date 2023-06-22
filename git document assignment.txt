@@ -1,0 +1,158 @@
+                                           GIT ACTIVITIES
+GIT:
+                         
+                     Git is a Distributed Version Control System  that allows multiple Developers to collabrate on a 
+a Project efficiently.It tracks changes to files,manages different Branches and facilitates merging and resolving
+conflicts.This document provides an overview of common git activities and commands used in day to day development 
+workflows.
+
+
+1) How to Clone a remote repositiry and push the code using Git
+
+Step1: Open command Prompt and navigate to the directory where we want to clone the repository
+Step2: Clone the remote repository by using the following command  git clone <repository URL>
+
+        example: git clone https://github.com/jayakumar
+Step3: Add the new file to the staging area to specific files use following command
+        git add --all
+Step4: commit changes  with a descriptive message using the command is
+        git commit m "message"
+Step5: Push the changes to the remote repository using command is
+       git push
+      
+     Git will upload our changes to the remote repository.
+
+
+
+2) Generating SSH key
+  
+   Step1: Open Gitbash here
+   Step2: Check for existing SSH Key run the following command in the terminal to if you already  have existing ssh key
+          ls -al/.ssh
+          look for files named 'id_rsa' 'id_rsa.pub'or any other existing keys
+   Step3: Generate a new SSH Key
+          Run the following command to generate a new ssh key
+          ssh-keygen -t rsa -b 4096 -c "your_email@example.com" replace "your _email@example.com" with ypour email
+          address associated with your git hub account.It will prompt you to choose a location to save the key
+
+   Step4: Start the SSH agent 
+          Run the following command to start the SSH agent in the background eval"$(ssh -agent -s)"
+   Step5: Add your SSH Private Key to the SSH agent 
+          Run the following command to add your private key to the SSHagent
+          ssh-add ~/.ssh/id_rsa
+  Step6:  Add your SSH key to GitHub
+          Run the following command to copy your public key pbcopy <~/.ssh/id_rsa.pub
+          If 'pbcopy' command doesnot work you can manually open the 'id_rsa.pub' file
+  Step7: Open your GitHub account in a webBrowser and go to "Settinmgs"
+         Click on "SSH and GPG Keys" option
+         Click on "New SSH Key"
+         Provide a title for your SSH Key
+         Past the copied public Key into the "Key" fied
+         Click on"Add SSH Key" to save it.
+
+
+3)  To clone a specific branch from a git repoisitory
+
+Step1: Open the command terminal
+Step2: Navigate to the directory where we want clone the repository
+Step3: The following command will be used to clone the repository and specify  the branch you want to clone
+       git clone -b <branch-name><remote-url>
+       Replace <branch-name> withe name of the branch we want to clone and <remote-url> with the url of remote repository
+Step4: Press enter to execute the command.Git vwill clone the repository.
+
+
+4)  Merge changes from one branch to the master branch in git
+
+Step1: Make sure you are on the branch where  we want to merge th changes. In this case switch to the master
+       branch by running the following command
+      ' git checkout master'
+Step2: Fetch the latest changes from the remote repository to ensure you have the up to date version
+       'git fetch'
+
+Step3: Merge the changes from the other branch into the  master branch use the following command
+       'git marge <branch-name> replace<branch-name> with the name of the branch from which you want
+       to merge the changes.
+ Step4: If the marge process encounters any conflicts git will notify us.We nedd to reslove these conflicts
+        manually.Open the conflicting files in a text editor,locate the conflicting sectipons marked with git conflict markers
+        and make the necessary adjustments to reslove the conflicts
+
+Step5: After resloving the conflicts,save the changes in the conflicting files.
+
+Step6: Once we have resloved all conflicts  stage the changes by adding the modified files to the staging
+       area by following command
+       'git add.'
+
+Step7: Commit the merge changes with a commit describing the merge 
+      git commit -m "changes from <branch-name>into the master"
+
+Step8:Push the merged changes into the remote repository by following commanmd
+      'git push origin master'
+
+
+
+
+5) Rollback a previous commit and push
+
+  Make sure you have the latest version of the repository by pulling any changes from the remote repository. You can use the following command:
+
+git pull origin <branch-name>
+Identify the commit hash of the commit you want to rollback. You can use the git log command to view the commit history and find the commit hash.
+
+Rollback the commit using the git revert command. This command creates a new commit that undoes the changes made in the specified commit.
+
+Copy code
+git revert <commit-hash>
+Open your code editor and update any files as needed.
+
+Once you're done with the changes, add and commit your modifications:
+
+git push origin <branch-name>
+Note that the above steps assume you have the necessary permissions to push to the remote repository. If you encounter any issues during the process, make sure you have the correct permissions or consult with your team or repository administrator.
+
+
+
+
+6)How to reslove conflicts
+ 
+ Conflicts can occur when merging or pulling changes from a remote repository if there are conflicting modifications made to the same file or lines of code. Resolving conflicts involves manually reviewing and modifying the conflicting files to incorporate the desired changes. Here's a general process to resolve conflicts:
+
+Before starting, ensure that you have committed any pending changes in your current branch. It's good practice to work on a clean branch without any uncommitted changes.
+
+Pull the latest changes from the remote repository:
+
+enter the command
+git pull origin <branch-name>
+
+Open the conflicting file(s) in a text editor or code editor.
+
+Manually modify the conflicting sections to resolve the conflicts according to your desired outcome. You can choose to keep one version entirely, merge the changes, or make a completely new modification.
+
+After resolving the conflicts, save the file(s).
+
+Once you have resolved all conflicts in the file(s), stage the changes by adding the modified files:
+
+
+git add <file1> <file2> ...
+ 
+Finally, push the changes to the remote repository:
+
+
+git push origin <branch-name>
+Note: In some cases, conflicts may arise during a rebase or cherry-pick operation. The process of resolving conflicts is similar, but instead of using git pull, you would use git rebase or git cherry-pick to apply the changes and follow the same steps to resolve the conflicts.   
+
+
+7)  How git pull from specific branch
+    
+    To pull changes from a specific branch in Git, you can use the following command:
+
+    git pull <remote> <branch-name> 
+    Make sure you are in the desired local branch where you want to pull the changes. You can use the command git branch to see the list of local branches and git checkout <branch-name> to switch to the desired branch.
+
+Execute the git pull command with the remote name (usually "origin") and the branch name from which you want to pull the changes. For example, if you want to pull changes from the "develop" branch on the "origin" remote repository, you would use the following command:
+
+git pull origin develop
+This command will fetch the latest changes from the remote repository and merge them into your local branch.
+
+Note: If you have uncommitted changes in your current branch, Git may  perform the pull operation to avoid potential conflicts. It's good practice to commit or stash your changes before pulling to a clean working directory
+
+ 
